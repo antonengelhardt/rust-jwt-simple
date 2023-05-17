@@ -52,7 +52,7 @@ impl RSAPublicKey {
     pub fn from_components(n: &[u8], e: &[u8]) -> Result<Self, Error> {
         let n = BigUint::from_bytes_be(n);
         let e = BigUint::from_bytes_be(e);
-        let rsa_pk = rsa::RsaPublicKey::new(n, e)?;
+        let rsa_pk = rsa::RsaPublicKey::new_with_max_size(n, e, 8192)?;
         Ok(RSAPublicKey(rsa_pk))
     }
 
